@@ -542,7 +542,14 @@
                 actionTitle.textContent = `${action.toUpperCase()} (${soundList.length})`;
                 actionCard.appendChild(actionTitle);
 
-                soundList.forEach(soundFile => {
+                // Sort sounds alphabetically by filename
+                const sortedSoundList = [...soundList].sort((a, b) => {
+                    const nameA = a.split('/').pop().toLowerCase();
+                    const nameB = b.split('/').pop().toLowerCase();
+                    return nameA.localeCompare(nameB);
+                });
+
+                sortedSoundList.forEach(soundFile => {
                     const soundItem = createSoundItemElement(category, unit, action, soundFile);
                     actionCard.appendChild(soundItem);
                 });
